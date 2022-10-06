@@ -1,0 +1,72 @@
+{
+  "framer-login-page": {
+    "Primary": {
+      "Purple": {
+        "value": "#6c3bf6",
+        "type": "color"
+      },
+      "Red": {
+        "value": "#fa4d56",
+        "type": "color"
+      },
+      "Green": {
+        "value": "#22b74e",
+        "type": "color"
+      },
+      "Blue": {
+        "value": "#0f62fe",
+        "type": "color"
+      }
+    },
+    "Label": {
+      "Primary": {
+        "value": "#000000",
+        "type": "color"
+      },
+      "Secondary": {
+        "value": "#00000099",
+        "type": "color"
+      },
+      "Tertiary": {
+        "value": "#0000004d",
+        "type": "color"
+      },
+      "Quaternary": {
+        "value": "#0000002e",
+        "type": "color"
+      }
+    },
+    "Gray": {
+      "01": {
+        "value": "#1d1d22",
+        "type": "color"
+      },
+      "02": {
+        "value": "#38383d",
+        "type": "color"
+      },
+      "03": {
+        "value": "#58585d",
+        "type": "color"
+      },
+      "04": {
+        "value": "#89898e",
+        "type": "color"
+      },
+      "05": {
+        "value": "#c0c0c5",
+        "type": "color"
+      },
+      "06": {
+        "value": "#efeff4",
+        "type": "color"
+      }
+    }
+  },
+  "$themes": [],
+  "$metadata": {
+    "tokenSetOrder": [
+      "framer-login-page"
+    ]
+  }
+}
