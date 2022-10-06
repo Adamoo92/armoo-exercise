@@ -1,5 +1,5 @@
 {
-  "framer-login-page": {
+  "framerLoginPage": {
     "Primary": {
       "Purple": {
         "value": "#6c3bf6",
@@ -66,7 +66,7 @@
   "$themes": [],
   "$metadata": {
     "tokenSetOrder": [
-      "framer-login-page"
+      "framerLoginPage"
     ]
   }
 }
