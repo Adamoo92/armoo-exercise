@@ -39,7 +39,7 @@ const LoginEmail = () => {
     }));
   };
 
-  const handleVerify = () => {
+  const handleVerifyEmail = () => {
     if (inputValue.email === "") {
       setMessage({ email: "邮箱地址不能为空" });
       setError({ email: true });
@@ -47,13 +47,12 @@ const LoginEmail = () => {
       setMessage({ email: "邮箱格式不正确" });
       setError({ email: true });
     } else {
-      setMessage(null);
+      setMessage({ email: null });
       setError({ email: false });
     }
-    if (inputValue.password === "") {
-      setMessage({ password: "密码不能为空" });
-    }
   };
+
+  const handleVerifyPassword = () => {};
 
   console.log(inputValue);
 
@@ -78,15 +77,15 @@ const LoginEmail = () => {
         <div className="textfield-container">
           <div
             className="input-container"
-            style={{
-              color: error.email ? Color.Red : Color.Gray01,
-            }}
+            // style={{
+            //   color: error.email ? Color.Red : Color.Gray01,
+            // }}
           >
             <input
               placeholder="请输入邮箱"
               name="email"
               onChange={handleChange}
-              onBlur={handleVerify}
+              onBlur={handleVerifyEmail}
               style={{
                 borderColor: error.email ? Color.Red : "",
                 backgroundColor: error.email ? "rgba(250, 77, 86, 0.05)" : "",
@@ -106,17 +105,11 @@ const LoginEmail = () => {
             <input
               placeholder="请输入密码"
               name="password"
-              onBlur={handleVerify}
+              onBlur={handleVerifyPassword}
               onChange={handleChange}
             />
             <IconEye />
           </div>
-          <span
-            className="message"
-            style={{ color: error.email ? Color.Red : "" }}
-          >
-            {message.password}
-          </span>
           <span isbutton="true">忘记密码？</span>
         </div>
         <button

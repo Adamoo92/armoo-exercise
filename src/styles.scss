@@ -20,7 +20,8 @@ $quaternary: #0000002e;
 
 body {
   background-color: $purple;
-  font-family: "PingFang SC";
+  // font-family: "PingFang SC";
+  font-family: "PingFang SC",system-ui, 'Helvetica Neue', sans-serif,'microsoft yahei ui', 'microsoft yahei';
   font-weight: 400;
 
   .logincontainer {
