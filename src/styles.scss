@@ -1,14 +1,205 @@
+$white: #ffffff;
+$gray01: #1d1d22;
+$gray02: #38383d;
+$gray03: #58585d;
+$gray04: #89898e;
+$gray05: #c0c0c5;
+$gray06: #efeff4;
+$purple: #6c3bf6;
+$red: #fa4d56;
+$green: #22b74e;
+$blue: #0f62fe;
+$primary: #000000;
+$secondary: #00000099;
+$tertiary: #0000004d;
+$quaternary: #0000002e;
 
-    $white:#FFFFFF;
-    $gray1:#F4F4F4;
-    $gray2:#E0E0E0;
-    $gray3:#C6C6C6;
-    $gray4:#8D8D8D;
-    $purple:#6C3BF6;
-    $pink:#FF0E56;
-    $green:#22B74E;
-    $blue:#3C78FF;
+* {
+  box-sizing: border-box;
+}
 
 body {
-    background-color: $purple;
+  background-color: $purple;
+  font-family: "PingFang SC";
+  font-weight: 400;
+
+  .logincontainer {
+    background-color: $white;
+    padding: 32px;
+    width: 440px;
+    border-radius: 24px;
+    gap: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    ul {
+      list-style: none;
+      display: flex;
+      gap: 40px;
+      font-size: 20px;
+      line-height: 28px;
+      color: $primary;
+      padding: 0px;
+
+      li {
+        cursor: pointer;
+        padding: 8px 0px;
+        position: relative;
+
+        &.selected {
+          font-weight: 500;
+        }
+
+        .underline {
+          width: 100%;
+          height: 4px;
+          background-color: $purple;
+          border-radius: 2px;
+          position: absolute;
+          bottom: 0px;
+        }
+      }
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      width: 100%;
+
+      .textfield-container {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+
+        .input-container {
+          display: flex;
+          gap: 4px;
+          align-items: center;
+
+          input {
+            width: 100%;
+            font-size: 16px;
+
+            line-height: 24px;
+            padding: 14px;
+            padding-left: 16px;
+            border: 2px solid;
+            border-color: $gray05;
+            border-radius: 8px;
+            outline: none;
+            background-color: transparent !important;
+
+            &:hover {
+              border-color: $gray04;
+            }
+
+            &:focus {
+              border-color: $gray01;
+            }
+
+            &::placeholder {
+              color: $quaternary;
+            }
+          }
+        }
+
+        span {
+          font-size: 14px;
+          line-height: 22px;
+          color: $quaternary;
+          width: max-content;
+
+          &[isbutton="true"] {
+            cursor: pointer;
+
+            &:hover {
+              color: $purple;
+            }
+          }
+        }
+      }
+
+      button {
+        font-size: 16px;
+        line-height: 24px;
+        font-weight: 500;
+        padding: 14px;
+        outline: none;
+        border: none;
+        border-radius: 8px;
+        background-color: $purple;
+        color: $white;
+        cursor: pointer;
+        margin-top: 12px;
+
+        &:disabled {
+          background-color: rgba(108, 59, 246, 0.4);
+          cursor: not-allowed;
+        }
+
+        &:disabled:hover {
+          background-color: rgba(108, 59, 246, 0.4);
+        }
+
+        &:hover {
+          background-color: #633bd4;
+        }
+      }
+    }
+
+    .signup {
+      font-size: 14px;
+      line-height: 22px;
+
+      span {
+        cursor: pointer;
+        color: $purple;
+      }
+    }
+
+    .divider {
+      font-size: 12px;
+      line-height: 20px;
+      color: $quaternary;
+      width: 100%;
+      display: flex;
+      gap: 8px;
+      position: relative;
+      height: 20px;
+      align-items: flex-end;
+
+      span {
+        width: max-content;
+        flex: none;
+      }
+
+      i {
+        flex: auto;
+        height: 50%;
+        border-top: 1px solid $quaternary;
+      }
+    }
+
+    .othersignin {
+      display: flex;
+      gap: 32px;
+
+      i {
+        width: 48px;
+        height: 48px;
+        background-color: transparent;
+        border-radius: 24px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+
+        &:hover {
+          background-color: $gray06;
+        }
+      }
+    }
+  }
 }
