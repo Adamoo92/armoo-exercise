@@ -117,6 +117,7 @@ body {
               border-radius: 8px;
               outline: none;
               background-color: transparent !important;
+              flex: auto;
 
               &:hover {
                 border-color: $gray04;
@@ -128,6 +129,32 @@ body {
 
               &::placeholder {
                 color: $quaternary;
+              }
+            }
+
+            button {
+              background-color: $white;
+              color: $gray01;
+              font-size: 16px;
+              font-weight: 400;
+              padding: 14px 28px;
+              width: max-content;
+              flex: none;
+              border: 2px solid;
+              border-color: $gray05;
+              margin: 0;
+              margin-left: 4px;
+
+              &[canclick="false"] {
+                background-color: $gray06;
+                color: $tertiary;
+              }
+              &[canclick="false"]:hover {
+                border-color: $gray05;
+              }
+
+              &:hover {
+                border-color: $gray04;
               }
             }
 

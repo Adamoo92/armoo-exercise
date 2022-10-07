@@ -1,10 +1,10 @@
-import LoginEmail from "./components/LoginEmail";
+import Login from "./components/Login";
 import "./styles.scss";
 
 function App() {
   return (
     <div className="App">
-      <LoginEmail />
+      <Login />
     </div>
   );
 }
