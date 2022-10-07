@@ -9,7 +9,7 @@ import {
   IconLogo,
   IconWeibo,
 } from "./Icon";
-import { motion, useTime, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { Color } from "./Color";
 import { IllustratorLogin } from "./Illustrator";
 
