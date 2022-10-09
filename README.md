@@ -647,7 +647,7 @@ export default App;
 
 ##### 方法三
 
-```jsx
+<Code language='javascript'>
 ...
   useEffect(() => {
     const fetchMd = async () => {
@@ -658,6 +658,7 @@ export default App;
     fetchMd();
   }, []);
 ...
+</Code>
 ```
 
 <br />
