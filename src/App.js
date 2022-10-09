@@ -1,42 +1,22 @@
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { dark } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { useState, useEffect } from "react";
+import Markdown from "markdown-to-jsx";
 
-const markdown = `
-Here is some JavaScript code:
-
-~~~js
-console.log('It works!')
-~~~
-`;
+const markdownUrl =
+  "https://raw.githubusercontent.com/Adamoo92/armoo-exercise/react-markdown/README.md";
 
 function App() {
+  const [markdown, setMarkdown] = useState("");
+
+  useEffect(() => {
+    fetch(markdownUrl)
+      .then((res) => res.text())
+      .then((text) => setMarkdown(text));
+  }, []);
+
   return (
     <div className="App">
-      <ReactMarkdown
-        children={markdown}
-        components={{
-          code({ node, inline, className, children, ...props }) {
-            const match = /language-(\w+)/.exec(className || "");
-            return !inline && match ? (
-              <SyntaxHighlighter
-                children={String(children).replace(/\n$/, "")}
-                style={dark}
-                language={match[1]}
-                PreTag="div"
-                {...props}
-              />
-            ) : (
-              <code className={className} {...props}>
-                {children}
-              </code>
-            );
-          },
-        }}
-      />
+      <Markdown>{markdown}</Markdown>
     </div>
   );
 }
-
 export default App;

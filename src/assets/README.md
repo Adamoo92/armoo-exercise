@@ -47,10 +47,10 @@
     13. [禁用自动URL链接](#DisabledURL)
     14. [折叠部分](#折叠部分)
 - React
-    1.  [安装 markdown-to-jsx](#Install)
+    1.  [安装react-markdown](#Install)
     2.  [渲染本地md文件](#renderlocal)
-    3.  [渲染在线md文件](#renderonline)
-    4.  [使用插件remark-gfm](#remark-gfm)
+    3.  [渲染在线md文件](#)
+    4.  [使用插件remark-gfm](#)
 
 <br />
 
@@ -590,16 +590,16 @@ Here's a simple footnote,[^1] and here's a longer one.[^2]
 
 ## React
 
-#### 安装 markdown-to-jsx {#Install}
+#### 安装 react-markdown {#Install}
 
-安装 `markdown-to-jsx` :
+安装 `react-markdown` :
 
-`npm i markdown-to-jsx`
+`npm i react-markdown`
 
-在 `App.js` 中导入 `Markdown` ：
+在 `App.js` 中导入 `ReactMarkdown` ：
 
 ```jsx
-import Markdown from 'markdown-to-jsx`;
+import ReactMarkdown from 'react-markdown`;
 ```
 
 <br />
@@ -609,8 +609,8 @@ import Markdown from 'markdown-to-jsx`;
 ##### 方法一
 
 ```jsx
+import ReactMarkdown from "react-markdown";
 import { useState, useEffect } from "react";
-import Markdown from "markdown-to-jsx";
 import md from "./assets/github.md";
 
 function App() {
@@ -624,7 +624,7 @@ function App() {
 
   return (
     <div className="App">
-      <Markdown>{markdown}</Markdown>
+      <ReactMarkdown children={markdown} />
     </div>
   );
 }
@@ -634,7 +634,12 @@ export default App;
 ##### 方法二
 
 ```jsx
-...
+import ReactMarkdown from "react-markdown";
+import { useState, useEffect } from "react";
+
+function App() {
+  const [markdown, setMarkdown] = useState("");
+
   useEffect(() => {
     import(`./assets/github.md`).then((res) => {
       fetch(res.default)
@@ -642,13 +647,26 @@ export default App;
         .then((text) => setMarkdown(text));
     });
   }, []);
-...
+
+  return (
+    <div className="App">
+      <ReactMarkdown children={markdown} />
+    </div>
+  );
+}
+export default App;
 ```
 
 ##### 方法三
 
 ```jsx
-...
+import ReactMarkdown from "react-markdown";
+import { useState, useEffect } from "react";
+import md from "./assets/github.md";
+
+function App() {
+  const [markdown, setMarkdown] = useState("");
+
   useEffect(() => {
     const fetchMd = async () => {
       const res = await fetch(md);
@@ -657,48 +675,13 @@ export default App;
     };
     fetchMd();
   }, []);
-...
-```
-
-<br />
-
-#### 渲染在线md文件 {#renderonline}
-
-```jsx
-import { useState, useEffect } from "react";
-import Markdown from "markdown-to-jsx";
-
-const markdownUrl =
-  "https://raw.githubusercontent.com/Adamoo92/armoo-exercise/react-markdown/README.md";
-
-function App() {
-  const [markdown, setMarkdown] = useState("");
-
-  useEffect(() => {
-    fetch(markdownUrl)
-      .then((res) => res.text())
-      .then((text) => setMarkdown(text));
-  }, []);
 
   return (
     <div className="App">
-      <Markdown>{markdown}</Markdown>
+      <ReactMarkdown children={markdown} />
     </div>
   );
 }
 export default App;
 ```
 
-<br />
-
-#### 使用插件remark-gfm {#remark-gfm}
-
-安装 `remark-gfm` :
-
-`npm i remark-gfm`
-
-在 `App.js` 中导入 `remarkGfm` ：
-
-```jsx
-import remarkGfm from 'remark-gfm`;
-```
