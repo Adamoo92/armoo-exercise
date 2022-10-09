@@ -1,4 +1,14 @@
 body {
-  background-color: #222;
+  background-color: rgb(13, 17, 23);
   color: antiquewhite;
+  display: flex;
+  justify-content: center;
+}
+
+a {
+  color: aqua;
+  text-decoration: none;
+}
+.App {
+  width: 800px;
 }

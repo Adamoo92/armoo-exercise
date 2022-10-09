@@ -1,18 +1,25 @@
-import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter";
-import { duotoneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
+// import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+// import { materialDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 
-const Code2 = ({ children, className }) => {
+// const Code = ({ children }) => {
+//   return (
+//     <div className="code">
+//       <SyntaxHighlighter
+//         language={className ? className.slice(5) : ""}
+//         style={oneDark}
+//       >
+//         {children}
+//       </SyntaxHighlighter>
+//     </div>
+//   );
+// };
+
+const Pre = ({ children }) => {
   return (
-    <div className="code">
-      <h1>hello</h1>
-      <SyntaxHighlighter
-        language={className.slice(5) && "text"}
-        style={duotoneDark}
-      >
-        {children}
-      </SyntaxHighlighter>
-    </div>
+    <pre>
+      <Code />
+    </pre>
   );
 };
 
-export default Code2;
+export default Pre;

@@ -50,7 +50,10 @@
     1.  [安装 markdown-to-jsx](#Install)
     2.  [渲染本地md文件](#renderlocal)
     3.  [渲染在线md文件](#renderonline)
-    4.  [使用插件remark-gfm](#remark-gfm)
+    4.  [options.overrides 覆盖 HTML 标签](#overrides)
+    5.  [使用插件react-syntax-highlighter](#react-syntax)
+    6.  [使用overrides 覆盖 code](#overridescode)
+    7.  [处理标题ID](#dealtitleid)
 
 <br />
 
@@ -691,14 +694,184 @@ export default App;
 
 <br />
 
-#### 使用插件remark-gfm {#remark-gfm}
+#### options.overrides 覆盖 HTML 标签 {#overrides}
 
-安装 `remark-gfm` :
+```jsx
+import Markdown from 'markdown-to-jsx';
 
-`npm i remark-gfm`
+const MyParagraph = ({ children, ...props}) => {
+    <div {...props}>{children}</div>
+}
 
-在 `App.js` 中导入 `remarkGfm` ：
+export default function App() {
+    return (
+        <Markdown
+            options={{
+                overrides: {
+                    h1: {
+                        component: MyParagraph,
+                        props: {
+                            classname: 'foo'
+                        }
+                    }
+                }
+            }}
+        >
+        # Hello World!
+        </Markdown>
+    )
+}
+```
+
+<br />
+
+#### 使用插件react-syntax-highlighter {#react-syntax}
+
+安装 `react-syntax-highlighter` :
+
+`npm i react-syntax-highlighter`
+
+在 `App.js` 中导入 `SyntaxHighlighter` ：
 
 ```javascript
-import remarkGfm from 'remark-gfm`;
+import SyntaxHighlighter from 'react-syntax-highlighter';
+```
+
+##### 一个示例：
+
+```javascript
+import SyntaxHighlighter from "react-syntax-highlighter/dist/esm/prism";
+import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
+
+const codetest = `useEffect(() => {
+    fetch(markdownUrl)
+      .then((res) => res.text())
+      .then((text) => setMarkdown(text));
+  }, []);
+`;
+
+const CodeTest = () => {
+  return (
+    <SyntaxHighlighter language="javascript" style={oneDark}>
+      {codetest}
+    </SyntaxHighlighter>
+  );
+};
+export default CodeTest;
+```
+
+##### Prism
+
+使用Prism代替 highlighter.js，可以解决jsx高亮显示的问题。
+
+```jsx
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+```
+
+**`language`** : 高亮显示的代码的语言。
+
+highlighter.js支持高亮显示的语言: [查看](https://github.com/react-syntax-highlighter/react-syntax-highlighter/blob/HEAD/AVAILABLE_LANGUAGES_HLJS.MD)
+
+Prism支持高亮显示的语言： [查看](https://github.com/react-syntax-highlighter/react-syntax-highlighter/blob/HEAD/AVAILABLE_LANGUAGES_PRISM.MD)
+
+**`style`** : 代码显示的样式，取决于使用的是 highlighter.js 还是 Prism 。
+
+highlighter.js高亮显示的样式: [查看](https://github.com/react-syntax-highlighter/react-syntax-highlighter/blob/HEAD/AVAILABLE_STYLES_HLJS.MD)
+
+Prism高亮显示的样式: [查看](https://github.com/react-syntax-highlighter/react-syntax-highlighter/blob/HEAD/AVAILABLE_STYLES_PRISM.MD)
+
+<br />
+
+#### 使用overrides 覆盖 code {#overridescode}
+
+```jsx
+// App.js
+...
+import Code from './Code';
+...
+ <Markdown
+        options={{
+          overrides: {
+            code: {
+              component: Code,
+            },
+          },
+        }}
+      >
+        {markdown}
+      </Markdown>
+...
+
+// Code.js
+import SyntaxHighlighter from "react-syntax-highlighter";
+import { atomOneDark } from "react-syntax-highlighter/dist/esm/styles/hljs";
+
+const Code = ({ children, className }) => {
+  return (
+    <div className="code">
+      <SyntaxHighlighter
+        language={className ? className.slice(5) : ""}
+        // 判断我们是否在md里指定了代码的语言类型
+        // 如果指定了语言类型，在转换时，语言类型前会被添加lang-
+        // 使用String.prototype.slice()去除前面生成的lang-
+        style={oneDark}
+      >
+        {children}
+      </SyntaxHighlighter>
+    </div>
+  );
+};
+
+export default Code;
+```
+
+<br />
+
+#### 处理标题ID {#dealtitleid}
+
+md的标题id的添加方法是在标题后添加 `{#id}` ,markdown-to-jsx 并没有正确的处理id。
+
+而是会直接把 `{#id}` 显示出来：
+
+```
+# Heading 1 {#title1}
+
+// output:
+// Heading 1 {#title1}
+```
+
+使用 `overrides` 去除标题id的方法：
+
+```jsx
+// App.js
+...
+const H2 = ({ children }) => {
+  const haveId = children.toString().includes("{");
+  // 判断是否制定了标题Id
+  const idIndex = haveId ? children.toString().indexOf("{") : null;
+  // 如果指定了标题Id，返回Id起始符号 { 的索引
+  console.log(children, haveId, idIndex);
+  return (
+    <h2 id={haveId ? children.toString().slice(idIndex + 2, -1) : children}>
+    // 如果有指定了标题Id，使用指定Id，如果没有指定，使用children作为id
+      {children.toString().slice(0, idIndex - 1)}
+      // 如果指定了标题Id，去掉id
+    </h2>
+  );
+};
+...
+
+...
+<Markdown
+    options={{
+        overrides: {
+            h2: {
+                component: H2,
+            },
+          },
+    }}
+>
+    {markdown}
+</Markdown>
+...
 ```
