@@ -19,21 +19,8 @@ git checkout XXX
 ### 删除分支
 git branch -d XXX
 
-<Code language='javascript'>
-...
-  useEffect(() => {
-    const fetchMd = async () => {
-      const res = await fetch(md);
-      const text = await res.text();
-      setMarkdown(text);
-    };
-    fetchMd();
-  }, []);
-...
-</Code>
 
-
-```jsx
+```javascript
 ...
   useEffect(() => {
     import(`./assets/github.md`).then((res) => {

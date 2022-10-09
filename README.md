@@ -598,7 +598,7 @@ Here's a simple footnote,[^1] and here's a longer one.[^2]
 
 在 `App.js` 中导入 `Markdown` ：
 
-```jsx
+```javascript
 import Markdown from 'markdown-to-jsx`;
 ```
 
@@ -608,7 +608,7 @@ import Markdown from 'markdown-to-jsx`;
 
 ##### 方法一
 
-```jsx
+```javascript
 import { useState, useEffect } from "react";
 import Markdown from "markdown-to-jsx";
 import md from "./assets/github.md";
@@ -633,7 +633,7 @@ export default App;
 
 ##### 方法二
 
-```jsx
+```javascript
 ...
   useEffect(() => {
     import(`./assets/github.md`).then((res) => {
@@ -647,7 +647,7 @@ export default App;
 
 ##### 方法三
 
-<Code language='javascript'>
+```javascript
 ...
   useEffect(() => {
     const fetchMd = async () => {
@@ -658,14 +658,13 @@ export default App;
     fetchMd();
   }, []);
 ...
-</Code>
 ```
 
 <br />
 
 #### 渲染在线md文件 {#renderonline}
 
-```jsx
+```javascript
 import { useState, useEffect } from "react";
 import Markdown from "markdown-to-jsx";
 
@@ -700,6 +699,6 @@ export default App;
 
 在 `App.js` 中导入 `remarkGfm` ：
 
-```jsx
+```javascript
 import remarkGfm from 'remark-gfm`;
 ```
