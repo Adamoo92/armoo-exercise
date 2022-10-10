@@ -1,11 +1,11 @@
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { materialDark } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 const PreCode = ({ children, className }) => {
   return (
     <SyntaxHighlighter
       language={className ? className.replace("lang-", "") : ""}
-      style={materialDark}
+      style={oneDark}
     >
       {children}
     </SyntaxHighlighter>

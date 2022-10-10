@@ -1,3 +1,151 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap");
+
 :root {
   $background: #0d1117;
+  $divider: #21262d;
+  $color: #c9d1d9;
+  $footercolor: #8b949e;
+  $link: #58a6ff;
+  $h6color: #8b949e;
+  $inlineCodeBg: #6e768166;
+
+  box-sizing: border-box;
+  font-family: "PingFang SC", system-ui, -apple-system, sans-serif;
+
+  h1,
+  h2,
+  h3 {
+    border-bottom: 1px solid $divider;
+    position: relative;
+
+    a {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      left: -24px;
+      top: calc(50% - 12px);
+      padding: 0;
+      padding-right: 8px;
+
+      svg {
+        cursor: pointer;
+        fill: $color;
+      }
+    }
+  }
+
+  h4,
+  h5,
+  h6 {
+    position: relative;
+
+    a {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      left: -24px;
+      top: calc(50% - 8px);
+      padding: 0;
+      padding-right: 8px;
+
+      svg {
+        cursor: pointer;
+        fill: $color;
+      }
+    }
+  }
+
+  h1 {
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 40px;
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+  }
+  h2 {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 30px;
+    padding-bottom: 8px;
+    margin: 24px 0 16px;
+  }
+  h3 {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 25px;
+    padding-bottom: 8px;
+    margin: 24px 0 16px;
+  }
+  h4 {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 20px;
+    margin: 24px 0 16px;
+  }
+  h5 {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 18px;
+    margin: 24px 0 16px;
+  }
+  h6 {
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 17px;
+    margin: 24px 0 16px;
+    color: $h6color;
+  }
+  p {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    margin: 0px 0px 16px;
+  }
+  a {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    padding: 24px 0px 16px;
+    color: $link;
+    text-decoration: none;
+  }
+  code {
+    font-size: 14px;
+    line-height: 20px;
+    font-family: "Space Mono", monospace, "PingFang SC";
+  }
+  body {
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    background-color: $background;
+    color: $color;
+    width: 100vw;
+    min-height: 100vh;
+
+    .App {
+      box-sizing: border-box;
+      width: 1200px;
+      padding: 40px 80px;
+      border: 1px solid $divider;
+    }
+
+    p {
+      code {
+        padding: 2px 6px;
+        background-color: $inlineCodeBg;
+        border-radius: 6px;
+        font-family: "Space Mono", monospace, "PingFang SC";
+      }
+    }
+    pre {
+      border-radius: 6px;
+    }
+    footer {
+      font-size: 12px;
+      line-height: 18px;
+      color: $footercolor;
+    }
+  }
 }

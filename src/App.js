@@ -2,20 +2,8 @@ import { useState, useEffect } from "react";
 import Markdown from "markdown-to-jsx";
 import "./markdown.scss";
 
-import md from "./assets/github.md";
-
 import Pre from "./components/Pre";
-
-const H4 = ({ children }) => {
-  const haveId = children.toString().includes("{");
-  const idIndex = haveId ? children.toString().indexOf("{") : null;
-  console.log(children, haveId, idIndex);
-  return (
-    <h2 id={haveId ? children.toString().slice(idIndex + 2, -1) : children}>
-      {children.toString().slice(0, idIndex - 1)}
-    </h2>
-  );
-};
+import { H1, H2, H3, H4, H5, H6 } from "./components/Title";
 
 const markdownUrl =
   "https://raw.githubusercontent.com/Adamoo92/armoo-exercise/react-markdown/README.md";
@@ -34,10 +22,24 @@ function App() {
       <Markdown
         options={{
           overrides: {
+            h1: {
+              component: H1,
+            },
+            h2: {
+              component: H2,
+            },
+            h3: {
+              component: H3,
+            },
             h4: {
               component: H4,
             },
-
+            h5: {
+              component: H5,
+            },
+            h6: {
+              component: H6,
+            },
             pre: {
               component: Pre,
             },
