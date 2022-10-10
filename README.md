@@ -52,7 +52,7 @@
     3.  [渲染在线md文件](#renderonline)
     4.  [options.overrides 覆盖 HTML 标签](#overrides)
     5.  [使用插件react-syntax-highlighter](#react-syntax)
-    6.  [使用overrides 覆盖 code](#overridescode)
+    6.  [代码高亮](#overridescode)
     7.  [处理标题ID](#dealtitleid)
 
 <br />
@@ -782,18 +782,49 @@ Prism高亮显示的样式: [查看](https://github.com/react-syntax-highlighter
 
 <br />
 
-#### 使用overrides 覆盖 code {#overridescode}
+#### 代码高亮 {#overridescode}
+
+使用`` ` ` ``创建的代码会被转换为`<p><code></code></p>`，可以使用css来进行修改格式。
+
+md里的代码块会被转换为`<pre><code></code></pre>`,可以使用代码覆盖来高亮显示代码。
+
+我们创建的代码块分为两种，一种是通过缩进创建的没有指定语言的代码块，一种是使用隔离代码块创建并且指定了语言的代码块：
+
+```
+// 没有指定语言的代码块：
+
+> 这是块的第一行
+>
+> 这是块的第三行
+```
+
+```html
+// 指定了语言为html的代码块：
+
+<html>
+    <head>
+        <title>Code</title>
+    </head>
+</html>
+```
+
+区别在于，指定了语言的代码块，在转换为jsx时，会给code标签一个class：
+`<code class='lang-jsx'>...</code>`
+
+当我们使用 SyntaxHighlighter 并且指定 `language={language}` 时，code 的 clss 会被转换为 `class="language-lang-jsx"` 。
+
+这是错误的，应该是 `class="language-jsx"` SyntaxHighlighter 才能正确的显示语法高亮，所以我们要把多余的 `lang-` 去除。
 
 ```jsx
 // App.js
 ...
-import Code from './Code';
+import Pre from "./components/Pre";
 ...
  <Markdown
         options={{
           overrides: {
-            code: {
-              component: Code,
+            pre: {
+              component: Pre,
             },
           },
         }}
@@ -802,27 +833,30 @@ import Code from './Code';
       </Markdown>
 ...
 
-// Code.js
-import SyntaxHighlighter from "react-syntax-highlighter";
-import { atomOneDark } from "react-syntax-highlighter/dist/esm/styles/hljs";
+// Pre.js
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+// highlighter.js 不支持高亮显示jsx
+import { materialDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 
-const Code = ({ children, className }) => {
+const PreCode = ({ children, className }) => {
   return (
-    <div className="code">
-      <SyntaxHighlighter
-        language={className ? className.slice(5) : ""}
-        // 判断我们是否在md里指定了代码的语言类型
-        // 如果指定了语言类型，在转换时，语言类型前会被添加lang-
-        // 使用String.prototype.slice()去除前面生成的lang-
-        style={oneDark}
-      >
-        {children}
-      </SyntaxHighlighter>
-    </div>
+    <SyntaxHighlighter
+      language={className ? className.replace("lang-", "") : ""}
+      // 判断我们是否在md里指定了语言类型，如果是，则去除‘lang-’，如果不是，则language指定为空
+      style={materialDark}
+    >
+      {children}
+    </SyntaxHighlighter>
   );
 };
 
-export default Code;
+const Pre = ({ children }) => {
+  return PreCode(children["props"]);
+  // 这里是调用<pre>的子元素<code>及其属性
+};
+
+export default Pre;
+
 ```
 
 <br />
@@ -875,3 +909,6 @@ const H2 = ({ children }) => {
 </Markdown>
 ...
 ```
+
+
+### 临时H3

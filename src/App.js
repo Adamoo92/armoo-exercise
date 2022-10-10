@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import Markdown from "markdown-to-jsx";
-import "./styles.css";
+import "./markdown.scss";
 
 import md from "./assets/github.md";
 
-import Pre from "./components/Code";
+import Pre from "./components/Pre";
 
-const H2 = ({ children }) => {
+const H4 = ({ children }) => {
   const haveId = children.toString().includes("{");
   const idIndex = haveId ? children.toString().indexOf("{") : null;
   console.log(children, haveId, idIndex);
@@ -24,7 +24,7 @@ function App() {
   const [markdown, setMarkdown] = useState("");
 
   useEffect(() => {
-    fetch(md)
+    fetch(markdownUrl)
       .then((res) => res.text())
       .then((text) => setMarkdown(text));
   }, []);
@@ -34,11 +34,8 @@ function App() {
       <Markdown
         options={{
           overrides: {
-            h2: {
-              component: H2,
-            },
             h4: {
-              component: H2,
+              component: H4,
             },
 
             pre: {
